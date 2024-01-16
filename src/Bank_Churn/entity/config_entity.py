@@ -14,3 +14,20 @@ class DataValidationConfig:
     result: str
     all_schema:dict
     
+@dataclass(frozen=True)
+class DataTransformationConfig:
+    root_dir: Path
+    data_path: Path
+
+@dataclass(frozen=True)
+class DataTrainerConfig:
+    root_dir:Path
+    train_data_path:Path
+    test_data_path:Path
+    model_name:str
+    target_column:str
+    n_estimators:float
+    subsample:float
+    max_depth:float
+    learning_rate:float
+    colsample_bytree:float

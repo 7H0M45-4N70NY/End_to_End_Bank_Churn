@@ -10,3 +10,12 @@ data_validation:
   target: artifacts/data_ingestion/train.csv
   result: artifacts/data_validation/result.txt
   
+data_transformation:
+  root_dir: artifacts/data_transformation
+  data_path: artifacts/data_ingestion/train.csv
+
+data_training:
+  root_dir: artifacts/data_training
+  train_data_path: artifacts/data_transformation/train.csv
+  test_data_path: artifacts/data_transformation/test.csv
+  model_name: model.joblib

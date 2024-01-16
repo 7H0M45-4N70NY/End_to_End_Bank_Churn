@@ -1,6 +1,7 @@
 from Bank_Churn.constants import *
 from Bank_Churn.utils.common import read_yaml,create_directories
-from Bank_Churn.entity.config_entity import (DataIngestionConfig,DataValidationConfig)
+from Bank_Churn.entity.config_entity import (DataIngestionConfig,DataValidationConfig,DataTransformationConfig,
+                                             DataTrainerConfig)
 
 class ConfigurationManager:
     def __init__(self,
@@ -35,3 +36,30 @@ class ConfigurationManager:
             result=config.result
         )
         return data_validation_config
+    def get_data_transformation_config(self)->DataTransformationConfig:
+        config=self.config.data_transformation 
+        target=self.schema.TARGET_COLUMNS
+        create_directories([config.root_dir])
+        data_transformation_config=DataTransformationConfig(
+            root_dir=config.root_dir,
+            data_path=config.data_path
+        )
+        return data_transformation_config
+    def get_model_training_config(self)->DataTrainerConfig:
+        config=self.config.data_training
+        params=self.params.XGBClassifier
+        schema=self.schema.TARGET_COLUMNS
+        create_directories([config.root_dir])
+        model_trainer_config=DataTrainerConfig(
+            root_dir=config.root_dir,
+            train_data_path=config.train_data_path,
+            test_data_path=config.test_data_path,
+            model_name=config.model_name,
+            target_column=schema.name,
+            n_estimators=params.n_estimators,
+            subsample=params.subsample,
+            max_depth=params.max_depth,
+            learning_rate=params.learning_rate,
+            colsample_bytree=params.colsample_bytree
+        )
+        return model_trainer_config
