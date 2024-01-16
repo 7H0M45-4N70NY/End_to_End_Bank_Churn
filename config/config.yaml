@@ -1,0 +1,12 @@
+artifacts_root: artifacts
+
+data_ingestion:
+  root_dir: artifacts/data_ingestion
+  source_url: experiments/train.csv
+  local_file_dir: artifacts/data_ingestion/train.csv
+
+data_validation:
+  root_dir: artifacts/data_validation
+  target: artifacts/data_ingestion/train.csv
+  result: artifacts/data_validation/result.txt
+  
