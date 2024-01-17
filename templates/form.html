@@ -1,0 +1,69 @@
+<html>
+<body>
+<form action="{{url_for('predict')}}" method="POST">
+    <div class="form-group">
+        <label for ="CreditScore">CreditScore</label>
+        <input type="text" id="CreditScore" name="CreditScore" carat placeholder ="Enter CreditScore value(float)">
+    </div>
+
+    <div class="form-group">
+        <label for="Age">Age:</label>
+        <input type="Age" id="Age" name="Age" placeholder="Enter Age value (float)">
+    </div>
+
+    <div class="form-group">  
+        <label for="Tenure">Tenure:</label>
+        <input type="text" id="Tenure" name="Tenure" placeholder="Enter Tenure value (float)">
+    </div>
+    
+    <div class="form-group">
+        <label for="Balance">Balance:</label>
+        <input type="text" id="Balance" name="Balance" placeholder="Enter Balance value (float)">
+    </div>
+  
+    <div class="form-group">
+        <label for="NumOfProductsy">NumOfProducts:</label>
+        <input type="text" id="NumOfProducts" name="NumOfProducts" placeholder="Enter NumOfProducts value (float)">
+    </div>
+  
+    <div class="form-group">
+        <label for="EstimatedSalary">EstimatedSalary:</label>
+        <input type="text" id="EstimatedSalary" name="EstimatedSalary" placeholder="Enter EstimatedSalary value (float)">
+    </div>         
+
+    <div class=""form-group>
+        <label for ="HasCrCard">HasCrCard:</label>
+        <select id="HasCrCard" name="HasCrCard">
+            <option value="True">True</option>
+            <option value="False">False</option>
+        </select>
+    </div>
+    <div class=""form-group>
+        <label for ="IsActiveMember">IsActiveMember:</label>
+        <select id="IsActiveMember" name="IsActiveMember">
+            <option value="True">True</option>
+            <option value="False">False</option>
+        </select>
+    </div>
+    <div class=""form-group>
+        <label for ="Gender">Gender:</label>
+        <select id="Gender" name="Gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+    </div>
+    <div class=""form-group>
+        <label for ="Geography">Geography:</label>
+        <select id="Geography" name="Geography">
+            <option value="France">France</option>
+            <option value="Germany">Germany</option>
+            <option value="Spain">Spain</option>
+        </select>
+    </div>
+
+    <div style="clear:both;"></div>
+    <input type="submit" value="Submit">
+
+</form>
+</body>
+</html>

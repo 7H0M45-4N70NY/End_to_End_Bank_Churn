@@ -1,7 +1,7 @@
 from Bank_Churn.constants import *
 from Bank_Churn.utils.common import read_yaml,create_directories
 from Bank_Churn.entity.config_entity import (DataIngestionConfig,DataValidationConfig,DataTransformationConfig,
-                                             DataTrainerConfig)
+                                             DataTrainerConfig,DataEvaluationConfig)
 
 class ConfigurationManager:
     def __init__(self,
@@ -63,3 +63,17 @@ class ConfigurationManager:
             colsample_bytree=params.colsample_bytree
         )
         return model_trainer_config
+    
+    def model_eval_config(self) ->DataEvaluationConfig:
+        config=self.config.model_evaluation 
+        schema=self.schema.TARGET_COLUMNS
+        create_directories([config.root_dir])
+        
+        model_evaluation_config =DataEvaluationConfig(
+            root_dir=config.root_dir,
+            test_data_path=config.test_data_path,
+            model_path=config.model_path,
+            metric_file_name=config.metric_file_name,
+            target_column=schema.name
+        ) 
+        return model_evaluation_config

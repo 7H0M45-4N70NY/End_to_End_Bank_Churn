@@ -31,3 +31,11 @@ class DataTrainerConfig:
     max_depth:float
     learning_rate:float
     colsample_bytree:float
+
+@dataclass(frozen=True)
+class DataEvaluationConfig:
+    root_dir: Path
+    test_data_path: Path
+    model_path: Path
+    metric_file_name: Path
+    target_column: str

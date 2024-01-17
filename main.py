@@ -3,6 +3,7 @@ from Bank_Churn.pipeline.stage_01_data_ingestion import DataIngestionTrainingPip
 from Bank_Churn.pipeline.stage_02_data_validation import DataValidationTrainingPipeline
 from Bank_Churn.pipeline.stage_03_data_transformation import DataTransformationTrainingPipline
 from Bank_Churn.pipeline.stage_04_model_training import ModelTrainerTrainingPipeline
+from Bank_Churn.pipeline.stage_05_model_evaluation import ModelEvaluationTrainingPipeline
 
 STAGE_NAME = "Data Ingestion stage"
 try:
@@ -44,3 +45,12 @@ except Exception as e:
         logger.exception(e)
         raise e
      
+STAGE_NAME="Model Evaluation Stage"
+try:
+   logger.info(f'>>>> stage {STAGE_NAME} STARTED <<<<<<')
+   model_evaluation=ModelEvaluationTrainingPipeline()
+   model_evaluation.main()
+   logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+except Exception as e:
+        logger.exception(e)
+        raise e

@@ -71,4 +71,32 @@ class DataTransformation:
         train_new.to_csv(os.path.join(self.config.root_dir, "train.csv"),index = False)
         print(train.shape)
         print(test.shape)
+        
+    def run_prediction_transformation(self,df2):
+        cat_cols=["Geography","Gender"]
+        num_cols=['CreditScore','Age','Tenure','Balance','NumOfProducts','HasCrCard','IsActiveMember','EstimatedSalary']
+        num_pipeline=Pipeline(
+                    steps=[
+                    ('imputer',SimpleImputer(strategy='median')),
+                    ('scaler',StandardScaler())
+                    ])
+        cat_pipeline=Pipeline(
+                    steps=[
+                    ('imputer',SimpleImputer(strategy='most_frequent')),
+                    ('ordinalencoder',OneHotEncoder(sparse_output=False,handle_unknown="ignore"))
+                    ]
+                )
+        preprocessor_cat=ColumnTransformer([
+                ('cat_pipeline',cat_pipeline,cat_cols)
+                ])
+        preprocessor_num=ColumnTransformer([
+                ('num_pipeline',num_pipeline,num_cols)
+                ])
+        result=preprocessor_cat.fit_transform(df2)
+        columns=preprocessor_cat.named_transformers_['cat_pipeline'].named_steps['ordinalencoder'].get_feature_names_out(cat_cols)
+        cat=pd.DataFrame(result,columns=columns)
+        result2=preprocessor_num.fit_transform(df2)
+        num=pd.DataFrame(result2,columns=df2[num_cols].columns)
+        transformed_data=pd.concat([num,cat],axis=1)
+        return transformed_data
     
